@@ -1,0 +1,37 @@
+{
+  "expo": {
+    "name": "Kulliyat",
+    "slug": "kulliyat",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "userInterfaceStyle": "dark",
+    "icon": "./assets/images/icon.png",
+    "backgroundColor": "#0B0A08",
+    "splash": {
+      "image": "./assets/images/icon.png",
+      "resizeMode": "contain",
+      "backgroundColor": "#0B0A08"
+    },
+    "ios": {
+      "supportsTablet": true,
+      "bundleIdentifier": "com.emirkulliyat.bosstracker"
+    },
+    "android": {
+      "adaptiveIcon": {
+        "foregroundImage": "./assets/images/icon.png",
+        "backgroundColor": "#0B0A08"
+      },
+      "package": "com.emirkulliyat.bosstracker"
+    },
+    "web": {
+      "favicon": "./assets/images/icon.png"
+    },
+    "scheme": "kulliyat",
+    "plugins": [
+      "expo-router"
+    ],
+    "experiments": {
+      "typedRoutes": true
+    }
+  }
+}

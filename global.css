@@ -1,0 +1,17 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --k-bg: #0B0A08;
+    --k-panel: #13110E;
+    --k-border: #221F19;
+    --k-text: #D6C8A6;
+    --k-text-dim: #7C735F;
+    --k-slain: #728F60;
+    --k-slain-soft: #273121;
+    --k-died: #8F6060;
+    --k-died-soft: #312121;
+  }
+}
