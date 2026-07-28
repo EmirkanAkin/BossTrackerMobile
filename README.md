@@ -8,7 +8,7 @@
 
 ---
 
-## 📌 Proje Özeti (IK / İşe Alım Uzmanları İçin)
+## 📌 Proje Özeti
 
 **Kulliyat**, Souls-like oyun kültürünü ve "Dark Fantasy" atmosferini yansıtan; performans, UI/UX ve sistem mimarisi açısından sektörel standartlarda geliştirilmiş bir **React Native (Expo)** mobil uygulamasıdır. 
 
