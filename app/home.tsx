@@ -1,5 +1,6 @@
 import React, { useEffect, useRef } from 'react';
 import { View, Text, TouchableOpacity, ScrollView, SectionList, Animated, LayoutAnimation, Platform, UIManager, Image } from 'react-native';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { useRouter } from 'expo-router';
 import { Plus, UserRound, Eye, Ghost } from 'lucide-react-native';
 import { cn } from '@/lib/utils';
@@ -72,6 +73,7 @@ export default function HomeScreen() {
     setStatus,
     deleteBoss,
   } = useAppContext();
+  const insets = useSafeAreaInsets();
 
   useEffect(() => {
     if (Platform.OS === 'android' && UIManager.setLayoutAnimationEnabledExperimental) {
@@ -135,39 +137,39 @@ export default function HomeScreen() {
 
   return (
     <View className="flex-1" style={{ backgroundColor: '#0B0A08' }}>
-      
+
       {/* ARKAPLAN GÖRSELİ */}
       <Image
         source={require('@/assets/images/arkaplan.jpg')}
         style={{ position: 'absolute', width: '100%', height: '100%', resizeMode: 'cover' }}
       />
-      
+
       {/* GENEL KARARTMA (Okunabilirliği artırmak için siyah/koyu kahve maske) */}
-      <View 
+      <View
         pointerEvents="none"
         className="absolute inset-0 z-0"
-        style={{ backgroundColor: 'rgba(11, 10, 8, 0.85)' }} 
+        style={{ backgroundColor: 'rgba(11, 10, 8, 0.85)' }}
       />
 
       {/* 🔥 KINDLED (ATEŞİ HARLAT) EFEKTİ */}
       {harlat && (
-        <Animated.View 
-          pointerEvents="none" 
-          className="absolute inset-0 z-0" 
+        <Animated.View
+          pointerEvents="none"
+          className="absolute inset-0 z-0"
           style={[
             { backgroundColor: 'rgba(212, 175, 55, 0.12)' }, // Yarı saydam altın sarısı/ateş tonu
             { opacity: pulse }
-          ]} 
+          ]}
         />
       )}
-      
+
       {/* header */}
-      <View className="flex-row items-center justify-between px-4 pb-3 pt-3">
+      <View className="flex-row items-center justify-between px-4 pb-3" style={{ paddingTop: insets.top + 12 }}>
         <View className="flex-col">
           <View className="flex-row items-center gap-2">
             <Text
-              className="text-lg font-black uppercase tracking-[3px]"
-              style={{ color: '#D6C8A6' }}
+              className="text-2xl font-black uppercase tracking-[4px]"
+              style={{ color: '#D6C8A6', fontFamily: 'serif' }}
             >
               KÜLLİYAT
             </Text>
@@ -310,7 +312,7 @@ export default function HomeScreen() {
         <TouchableOpacity
           onPress={handleAdd}
           activeOpacity={0.8}
-          className="absolute bottom-6 right-5 z-20 flex h-14 w-14 items-center justify-center rounded-full border-2"
+          className="absolute bottom-20 right-5 z-20 flex h-14 w-14 items-center justify-center rounded-full border-2"
           style={{
             borderColor: '#D4AF37',
             backgroundColor: '#13110E',

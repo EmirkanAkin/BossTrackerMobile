@@ -12,7 +12,7 @@ function RootLayoutNav() {
   return (
     <GestureHandlerRootView style={{ flex: 1 }}>
       <SafeAreaProvider>
-        <SafeAreaView className="flex-1 bg-[#0B0A08]" edges={['top', 'left', 'right', 'bottom']}>
+        <SafeAreaView className="flex-1 bg-[#0B0A08]" edges={['left', 'right', 'bottom']}>
           <View className="flex-1 bg-[#0B0A08]">
             <StatusBar style="light" />
         <Stack screenOptions={{ headerShown: false, contentStyle: { backgroundColor: '#0B0A08' } }}>
@@ -21,7 +21,7 @@ function RootLayoutNav() {
           <Stack.Screen name="detail" />
           <Stack.Screen name="pairing" />
           <Stack.Screen name="profile" />
-          <Stack.Screen name="add-boss" options={{ presentation: 'transparentModal', animation: 'fade' }} />
+          <Stack.Screen name="add-boss" options={{ presentation: 'transparentModal', animation: 'fade', contentStyle: { backgroundColor: 'transparent' } }} />
             </Stack>
           </View>
         </SafeAreaView>

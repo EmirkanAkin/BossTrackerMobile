@@ -88,7 +88,7 @@ export function AppProvider({ children }: { children: React.ReactNode }) {
           gameId: b.oyun,
           deaths: b.olumler,
           status: b.kesildiMi ? 'slain' : 'pending',
-          history: [] // Not used in web
+          history: b.kayitlar || []
         }));
         setBosses(mappedBosses);
       } else {
@@ -135,21 +135,29 @@ export function AppProvider({ children }: { children: React.ReactNode }) {
       isim: b.name,
       oyun: b.gameId,
       olumler: b.deaths,
-      kesildiMi: b.status === 'slain'
+      kesildiMi: b.status === 'slain',
+      kayitlar: b.history || []
     }));
     await setDoc(doc(db, 'hunters', activeHunterId), { bosslar }, { merge: true });
   }
 
   async function setStatus(id: string, kind: 'slain' | 'died') {
     if (activeRole === 'observer') return;
+    
+    const now = new Date();
+    const timeString = now.toLocaleTimeString('tr-TR', { hour: '2-digit', minute: '2-digit' });
+    const newHistoryEvent = { id: String(Date.now()), kind, label: timeString };
+
     const newBosses = bosses.map(b => {
       if (b.id !== id) return b;
       
+      const updatedHistory = [...(b.history || []), newHistoryEvent];
+      
       if (kind === 'died') {
-        return { ...b, deaths: b.deaths + 1, status: 'pending' as const };
+        return { ...b, deaths: b.deaths + 1, status: 'pending' as const, history: updatedHistory };
       }
       
-      return { ...b, status: 'slain' as const };
+      return { ...b, status: 'slain' as const, history: updatedHistory };
     });
     await writeBosses(newBosses);
   }

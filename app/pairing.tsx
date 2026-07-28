@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { View, Text, TouchableOpacity, ScrollView, TextInput, KeyboardAvoidingView, Platform, Modal, Alert } from 'react-native';
 import { useRouter } from 'expo-router';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { X, Copy, Check } from 'lucide-react-native';
 import * as Clipboard from 'expo-clipboard';
 import { cn } from '@/lib/utils';
@@ -11,6 +12,7 @@ import { doc, setDoc, serverTimestamp } from 'firebase/firestore';
 
 export default function PairingScreen() {
   const router = useRouter();
+  const insets = useSafeAreaInsets();
   const { localUserId, connectToWorld, setObserver } = useAppContext();
   const [entry, setEntry] = useState('');
   
@@ -71,7 +73,7 @@ export default function PairingScreen() {
       className="flex-1" 
       style={{ backgroundColor: '#0B0A08' }}
     >
-      <View className="flex-row items-center justify-between px-5 pb-4 pt-6 border-b border-[#1E1B15]">
+      <View className="flex-row items-center justify-between px-5 pb-4 border-b border-[#1E1B15]" style={{ paddingTop: insets.top + 24 }}>
         <Text
           className="font-black text-lg uppercase tracking-[3px]"
           style={{ color: '#D6C8A6' }}
@@ -143,6 +145,7 @@ export default function PairingScreen() {
             onChangeText={(text) => setEntry(text.replace(/\D/g, '').slice(0, 4))}
             placeholder="Arkadaşının Kodunu Gir"
             placeholderTextColor="rgba(124,115,95,0.5)"
+            caretHidden={true}
             className="w-full border py-3 text-center text-lg mt-2"
             style={{
               backgroundColor: '#1E1B15',

@@ -1,5 +1,6 @@
 import { View, Text, TouchableOpacity, ScrollView } from 'react-native';
 import { useLocalSearchParams, useRouter } from 'expo-router';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { ChevronLeft, Minus, Plus, Swords, Skull } from 'lucide-react-native';
 import { gameById } from '@/lib/kulliyat/data';
 import { StatusPill, Label, Hairline, KButton } from '@/components/kulliyat/primitives';
@@ -9,6 +10,7 @@ export default function DetailScreen() {
   const router = useRouter();
   const { id } = useLocalSearchParams<{ id: string }>();
   const { bosses, observer, setStatus, adjustDeaths, deleteBoss } = useAppContext();
+  const insets = useSafeAreaInsets();
 
   const boss = bosses.find((b) => b.id === id);
 
@@ -27,7 +29,7 @@ export default function DetailScreen() {
 
   return (
     <View className="flex-1" style={{ backgroundColor: '#0B0A08' }}>
-      <View className="flex-row items-center gap-3 px-4 pb-2 pt-3">
+      <View className="flex-row items-center gap-3 px-4 pb-2" style={{ paddingTop: insets.top + 12 }}>
         <TouchableOpacity
           onPress={() => router.back()}
           activeOpacity={0.8}
@@ -63,10 +65,10 @@ export default function DetailScreen() {
           <View className="flex-col gap-1">
             <Label>Ölüm Sayısı</Label>
             <View className="flex-row items-center gap-2">
-              <Skull size={22} strokeWidth={1.5} color="#8F6060" />
+              <Skull size={22} strokeWidth={1.5} color="#B33A3A" />
               <Text
                 className="font-black text-3xl tabular-nums"
-                style={{ color: '#8F6060' }}
+                style={{ color: '#B33A3A' }}
               >
                 {boss.deaths}
               </Text>
@@ -74,16 +76,16 @@ export default function DetailScreen() {
           </View>
           <View className="flex-row items-center gap-3">
             <StepperButton
-              disabled={observer || boss.deaths <= 0}
+              disabled={observer || boss.deaths <= 0 || boss.status === 'slain'}
               onClick={() => adjustDeaths(boss.id, -1)}
             >
-              <Minus size={18} strokeWidth={2} color={observer || boss.deaths <= 0 ? '#4a4438' : '#D6C8A6'} />
+              <Minus size={18} strokeWidth={2} color={(observer || boss.deaths <= 0 || boss.status === 'slain') ? '#4a4438' : '#D6C8A6'} />
             </StepperButton>
             <StepperButton
-              disabled={observer}
+              disabled={observer || boss.status === 'slain'}
               onClick={() => adjustDeaths(boss.id, 1)}
             >
-              <Plus size={18} strokeWidth={2} color={observer ? '#4a4438' : '#D6C8A6'} />
+              <Plus size={18} strokeWidth={2} color={(observer || boss.status === 'slain') ? '#4a4438' : '#D6C8A6'} />
             </StepperButton>
           </View>
         </View>
@@ -99,7 +101,7 @@ export default function DetailScreen() {
           <StatusPill
             kind="died"
             active={boss.status === 'died'}
-            disabled={observer}
+            disabled={observer || boss.status === 'slain'}
             onClick={() => setStatus(boss.id, 'died')}
           />
         </View>
@@ -108,7 +110,7 @@ export default function DetailScreen() {
         <View className="mt-6 flex-col gap-3">
           <Label>Kayıtlar</Label>
           <Hairline />
-          {boss.history.length === 0 ? (
+          {(!boss.history || boss.history.length === 0) ? (
             <Text className="py-4 text-center text-[11px]" style={{ color: '#7C735F' }}>
               Henüz bir iz bırakılmadı.
             </Text>
@@ -118,14 +120,14 @@ export default function DetailScreen() {
                 className="absolute left-[3px] top-1 bottom-1 w-[1px]"
                 style={{ backgroundColor: '#221F19' }}
               />
-              {boss.history.map((h, i) => {
+              {boss.history.map((h) => {
                 const isSlain = h.kind === 'slain';
                 return (
                   <View key={h.id} className="relative flex-row items-center gap-3">
                     <View
                       className="absolute -left-[21px] flex h-5 w-5 items-center justify-center rounded-full border"
                       style={{
-                        borderColor: isSlain ? '#728F60' : '#8F6060',
+                        borderColor: isSlain ? '#728F60' : '#B33A3A',
                         backgroundColor: '#0B0A08',
                         zIndex: 10,
                       }}
@@ -133,11 +135,11 @@ export default function DetailScreen() {
                       {isSlain ? (
                         <Swords size={10} color="#728F60" />
                       ) : (
-                        <Skull size={10} color="#8F6060" />
+                        <Skull size={10} color="#B33A3A" />
                       )}
                     </View>
                     <Text
-                      className="ml-2 text-[11px] font-medium flex-1"
+                      className="ml-2 text-[11px] font-medium flex-1 tabular-nums"
                       style={{ color: '#D6C8A6' }}
                     >
                       {h.label}
@@ -154,6 +156,8 @@ export default function DetailScreen() {
             </View>
           )}
         </View>
+
+
 
         {/* delete */}
         {!observer && (

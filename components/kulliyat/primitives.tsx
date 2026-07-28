@@ -110,17 +110,17 @@ export function StatusPill({
       disabled={disabled}
       activeOpacity={disabled ? 1 : 0.7}
       className={cn(
-        "flex-row items-center gap-1.5 rounded-[3px] border px-2.5 py-1.5",
+        "flex-row items-center gap-2 rounded-[3px] border px-3 py-2",
         disabled && "opacity-45"
       )}
       style={{
-        borderColor: active ? (isSlain ? '#728F60' : '#8F6060') : '#221F19',
+        borderColor: active ? (isSlain ? '#728F60' : '#B33A3A') : '#221F19',
         backgroundColor: active ? (isSlain ? '#273121' : '#312121') : 'transparent',
       }}
     >
-      {isSlain ? <Swords size={12} strokeWidth={1.75} color={active ? '#a7d0af' : '#7C735F'} /> : <Skull size={12} strokeWidth={1.75} color={active ? '#e0a3a3' : '#7C735F'} />}
+      {isSlain ? <Swords size={14} strokeWidth={1.75} color={active ? '#a7d0af' : '#7C735F'} /> : <Skull size={14} strokeWidth={1.75} color={active ? '#e0a3a3' : '#7C735F'} />}
       <Text
-        className="text-[10px] font-bold uppercase tracking-[1px]"
+        className="text-[11px] font-bold uppercase tracking-[1px]"
         style={{
           color: active ? (isSlain ? '#a7d0af' : '#e0a3a3') : '#7C735F',
         }}
@@ -192,7 +192,7 @@ export function StatStrip({
   const items = [
     { label: 'KESİLEN', value: slain, color: '#728F60' },
     { label: 'TOPLAM', value: total, color: '#D4AF37' },
-    { label: 'ÖLÜMLER', value: deaths, color: '#8F6060' },
+    { label: 'ÖLÜMLER', value: deaths, color: '#B33A3A' },
   ];
   return (
     <View
@@ -209,8 +209,8 @@ export function StatStrip({
           style={i > 0 ? { borderColor: '#221F19' } : undefined}
         >
           <Text
-            className="font-black text-xl leading-none"
-            style={{ color: it.color }}
+            className="font-bold text-xl leading-none"
+            style={{ color: it.color, fontFamily: 'serif' }}
           >
             {it.value}
           </Text>

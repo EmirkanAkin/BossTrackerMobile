@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { View, Text, TouchableOpacity, TextInput, KeyboardAvoidingView, Platform } from 'react-native';
+import { View, Text, TouchableOpacity, TextInput, KeyboardAvoidingView, Platform, ScrollView } from 'react-native';
 import { useRouter } from 'expo-router';
 import { X } from 'lucide-react-native';
 import { cn } from '@/lib/utils';
@@ -85,37 +85,41 @@ export default function AddBossScreen() {
 
   return (
     <KeyboardAvoidingView 
-      behavior={Platform.OS === 'ios' ? 'padding' : 'padding'} 
-      className="flex-1 justify-end" 
-      style={{ backgroundColor: 'rgba(0,0,0,0.6)' }}
+      behavior={Platform.OS === 'ios' ? 'padding' : 'height'} 
+      style={{ flex: 1 }}
     >
-      {/* Background touch area to close */}
-      <TouchableOpacity
-        activeOpacity={1}
-        onPress={handleClose}
-        style={{ position: 'absolute', top: 0, bottom: 0, left: 0, right: 0 }}
-      />
-
-      <View
-        className="border-t"
-        style={{
-          backgroundColor: '#13110E',
-          borderColor: '#D4AF37',
-          paddingBottom: 24,
-        }}
+      <ScrollView 
+        contentContainerStyle={{ flexGrow: 1, justifyContent: 'flex-end' }}
+        keyboardShouldPersistTaps="handled"
+        showsVerticalScrollIndicator={false}
       >
-        <View className="flex-row items-center justify-between px-5 pb-3 pt-4">
-          <Text
-            className="font-bold text-base uppercase tracking-[1px]"
-            style={{ color: '#D6C8A6' }}
-          >
-            Yeni Canavar
-          </Text>
-          <TouchableOpacity onPress={handleClose} activeOpacity={0.8} hitSlop={{ top: 10, bottom: 10, left: 10, right: 10 }}>
-            <X size={18} color="#7C735F" />
-          </TouchableOpacity>
-        </View>
-        <Hairline />
+        {/* Background touch area to close */}
+        <TouchableOpacity
+          activeOpacity={1}
+          onPress={handleClose}
+          style={{ position: 'absolute', top: 0, bottom: 0, left: 0, right: 0, backgroundColor: 'rgba(0,0,0,0.6)' }}
+        />
+
+        <View
+          className="border-t"
+          style={{
+            backgroundColor: '#13110E',
+            borderColor: '#D4AF37',
+            paddingBottom: 24,
+          }}
+        >
+          <View className="flex-row items-center justify-between px-5 pb-3 pt-4">
+            <Text
+              className="font-bold text-base uppercase tracking-[1px]"
+              style={{ color: '#D6C8A6' }}
+            >
+              Yeni Canavar
+            </Text>
+            <TouchableOpacity onPress={handleClose} activeOpacity={0.8} hitSlop={{ top: 10, bottom: 10, left: 10, right: 10 }}>
+              <X size={18} color="#7C735F" />
+            </TouchableOpacity>
+          </View>
+          <Hairline />
 
         <View className="flex-col gap-4 px-5 pb-3 pt-4">
           <View className="flex-col gap-1.5">
@@ -208,6 +212,7 @@ export default function AddBossScreen() {
           )}
         </View>
       </View>
+      </ScrollView>
     </KeyboardAvoidingView>
   );
 }

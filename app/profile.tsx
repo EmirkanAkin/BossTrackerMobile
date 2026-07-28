@@ -1,11 +1,13 @@
 import { View, Text, TouchableOpacity, ScrollView } from 'react-native';
 import { useRouter } from 'expo-router';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { ChevronLeft, RefreshCw, Users, LogOut } from 'lucide-react-native';
 import { PinDisplay, Label, Hairline, TorchToggle, KButton, RoleBadge } from '@/components/kulliyat/primitives';
 import { useAppContext } from '@/lib/kulliyat/context';
 
 export default function ProfileScreen() {
   const router = useRouter();
+  const insets = useSafeAreaInsets();
   const {
     connected,
     activeRole,
@@ -29,7 +31,7 @@ export default function ProfileScreen() {
 
   return (
     <View className="flex-1" style={{ backgroundColor: '#0B0A08' }}>
-      <View className="flex-row items-center gap-3 px-4 pb-2 pt-3">
+      <View className="flex-row items-center gap-3 px-4 pb-2" style={{ paddingTop: insets.top + 12 }}>
         <TouchableOpacity onPress={handleBack} activeOpacity={0.8} className="flex h-9 w-9 items-center justify-center">
           <ChevronLeft size={22} color="#7C735F" />
         </TouchableOpacity>

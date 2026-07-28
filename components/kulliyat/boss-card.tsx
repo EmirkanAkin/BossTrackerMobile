@@ -135,19 +135,19 @@ export function BossCard({
           />
 
           {/* game color spine */}
-          <View className="w-1 shrink-0" style={{ backgroundColor: game.color }} />
+          <View className="w-1.5 shrink-0" style={{ backgroundColor: game.color }} />
 
-          <View className="flex-1 flex-col gap-2 px-3 py-2.5">
+          <View className="flex-1 flex-col gap-3 px-4 py-3.5">
             <TouchableOpacity onPress={onOpen} className="flex-row items-start justify-between gap-2" activeOpacity={0.7}>
               <View className="flex-1">
                 <Text
-                  className="font-black text-sm uppercase leading-tight tracking-[1px]"
-                  style={{ color: '#D6C8A6' }}
+                  className="font-black text-lg uppercase leading-tight tracking-[1px]"
+                  style={{ color: '#D6C8A6', fontFamily: 'serif' }}
                 >
                   {boss.name}
                 </Text>
                 <Text
-                  className="mt-0.5 text-[9px] font-medium uppercase tracking-[2px]"
+                  className="mt-1 text-[10px] font-bold uppercase tracking-[2px]"
                   style={{ color: game.color }}
                 >
                   {game.short}
@@ -159,9 +159,9 @@ export function BossCard({
             </TouchableOpacity>
 
             <View className="flex-row items-center justify-between">
-              <Animated.View className="flex-row items-center gap-1" style={{ transform: [{ scale }] }}>
-                <Skull size={13} strokeWidth={1.75} color="#7C735F" />
-                <Text className="text-[11px] font-semibold" style={{ color: '#7C735F' }}>
+              <Animated.View className="flex-row items-center gap-1.5" style={{ transform: [{ scale }] }}>
+                <Skull size={15} strokeWidth={1.75} color="#7C735F" />
+                <Text className="text-[13px] font-semibold" style={{ color: '#7C735F' }}>
                   {boss.deaths}
                 </Text>
               </Animated.View>
