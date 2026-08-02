@@ -1,9 +1,11 @@
 # Kulliyat - Souls-Like Boss Tracker (React Native)
 
 <div align="center">
-  <img src="./assets/images/icon.png" width="120" height="120" alt="Kulliyat Logo" />
+  <img src="./assets/images/logo.png" width="200" height="200" alt="Kulliyat Logo" />
   <h3>Külliyat: Ruhların Günlüğü</h3>
   <p>Elden Ring, Sekiro, Bloodborne ve Dark Souls serileri için tasarlanmış gerçek zamanlı, co-op destekli gelişmiş Boss Takip Uygulaması.</p>
+  <br />
+  <img src="./assets/images/demo.gif" width="280" alt="Kulliyat Demo" />
 </div>
 
 ---
